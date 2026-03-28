@@ -12,5 +12,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Practi1.unity
     guid: 1b71ea8b6e1f4a6469594293fcbb27fb
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8aee64a809a8a964ba2ab25e80e6fb4c, type: 3}
   m_UseUCBPForAssetBundles: 0

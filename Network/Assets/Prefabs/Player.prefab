@@ -253,6 +253,8 @@ GameObject:
   - component: {fileID: 1096502815928575346}
   - component: {fileID: 3698019863728415794}
   - component: {fileID: 3325384436846119877}
+  - component: {fileID: 1791098325531203775}
+  - component: {fileID: 4387589612833837949}
   - component: {fileID: 7692480427583264062}
   - component: {fileID: 6192773299941529736}
   m_Layer: 0
@@ -370,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 728677396
+  GlobalObjectIdHash: 3095779830
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -383,6 +385,35 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &1791098325531203775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687942608944043318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a126826a1da5b0142825cd29d0a222da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  ShowTopMostFoldoutHeaderGroup: 1
+  _playerNetwork: {fileID: 7692480427583264062}
+  _damage: 10
+  playerInput: {fileID: 4387589612833837949}
+--- !u!114 &4387589612833837949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687942608944043318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae57139bc1283a48bcb47742df0dba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+  inputActions: {fileID: -944628639613478452, guid: 8aee64a809a8a964ba2ab25e80e6fb4c, type: 3}
 --- !u!114 &7692480427583264062
 MonoBehaviour:
   m_ObjectHideFlags: 0

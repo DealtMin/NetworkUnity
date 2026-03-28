@@ -20,6 +20,8 @@ public class PlayerNetwork : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        // Случайная позиция чтобы игроки не появлялись в одном месте
+        transform.position = new Vector3(Random.Range(-5, 5), 0, 0);
         if (IsOwner)
         {
             // Только владелец отправляет на сервер свой локально введенный ник.
