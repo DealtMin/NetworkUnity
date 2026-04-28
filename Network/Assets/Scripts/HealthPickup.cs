@@ -32,5 +32,6 @@ public class HealthPickup : NetworkBehaviour
 
         _manager.OnPickedUp(_spawnPosition);
         NetworkObject.Despawn(destroy: true);
+
     }
 }

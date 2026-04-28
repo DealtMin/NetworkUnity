@@ -25,15 +25,21 @@ public class PlayerNetwork : NetworkBehaviour
         NetworkVariableWritePermission.Server
     );
 
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private Respawn[] _spawnPoints;
     [SerializeField] private GameObject _playerVisual;
     
     // Флаг для предотвращения множественных корутин
     private bool _isRespawning = false;
     private Coroutine _respawnCoroutine;
 
+    private void Awake()
+    {
+        _spawnPoints = FindObjectsByType<Respawn>(FindObjectsSortMode.None);
+        Debug.Log(_spawnPoints[0]);
+    }
     public override void OnNetworkSpawn()
     {
+
         if (IsOwner)
         {
             SubmitNicknameServerRpc(ConnectionUI.PlayerNickname);
@@ -44,7 +50,7 @@ public class PlayerNetwork : NetworkBehaviour
         IsAlive.OnValueChanged += OnIsAliveChanged;
         
         // Сразу применяем текущее состояние визуала
-        UpdateVisualState(IsAlive.Value);
+        UpdateVisualState(IsAlive.Value);        
     }
 
     public override void OnNetworkDespawn()
@@ -124,12 +130,12 @@ public class PlayerNetwork : NetworkBehaviour
             if (cc != null)
             {
                 cc.enabled = false;
-                transform.position = _spawnPoints[idx].position;
+                transform.position = _spawnPoints[idx].transform.position;
                 cc.enabled = true;
             }
             else
             {
-                transform.position = _spawnPoints[idx].position;
+                transform.position = _spawnPoints[idx].transform.position;
             }
         }
         else
