@@ -9,12 +9,18 @@ public class PlayerMovement : NetworkBehaviour
 
     private CharacterController _cc;
     private float _verticalVelocity;
+    private PlayerNetwork _playerNetwork;
 
-    private void Awake() => _cc = GetComponent<CharacterController>();
+    private void Awake() {
+         _cc = GetComponent<CharacterController>();
+         _playerNetwork = GetComponent<PlayerNetwork>();
+    }
 
     private void Update()
     {
-        if (!IsOwner) { return;}
+        if (!IsOwner) return;
+        if (!_playerNetwork.IsAlive.Value) return;
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 

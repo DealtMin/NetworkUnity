@@ -1,6 +1,6 @@
+using Unity.Collections;
 using TMPro;
 using Unity.Netcode;
-using Unity.Collections;
 using UnityEngine;
 
 public class PlayerView : NetworkBehaviour

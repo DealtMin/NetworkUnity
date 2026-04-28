@@ -1,4 +1,3 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,32 +5,26 @@ public class PlayerCombat : NetworkBehaviour
 {
     [SerializeField] private PlayerNetwork _playerNetwork;
     [SerializeField] private int _damage = 10;
-    [SerializeField] private PlayerInput playerInput;
 
-    void OnEnable()
-    {
-        playerInput.OnAttackPressed += Attack;
-    }
-    void OnDisable()
-    {
-        playerInput.OnAttackPressed -= Attack;
-    }
-    private void Attack()
-    {
-        TryAttack(FindWhoAttack());                
-    }
 
-    // Пока без красивой реализации кого атаковать
-    private PlayerNetwork FindWhoAttack()
+    void Update()
+{
+    if (!IsOwner) return; // Только локальный игрок может инициировать атаку
+
+    if (Input.GetKeyDown(KeyCode.Space))
     {
-        PlayerNetwork[] players = FindObjectsByType<PlayerNetwork>(FindObjectsSortMode.None);
-        foreach (var player in players)
+        // Простой поиск цели: находим первый объект с PlayerNetwork, который не мы
+        PlayerNetwork[] allPlayers = FindObjectsByType<PlayerNetwork>(FindObjectsSortMode.None);
+        foreach (var player in allPlayers)
         {
-            if (player != _playerNetwork)
-            return player;
+            if (player != _playerNetwork) // _playerNetwork ссылка на свой компонент
+            {
+                TryAttack(player);
+                break; // Атакуем только первого найденного
+            }
         }
-        return _playerNetwork;
     }
+}
 
     public void TryAttack(PlayerNetwork target)
     {
@@ -52,10 +45,7 @@ public class PlayerCombat : NetworkBehaviour
         PlayerNetwork targetPlayer = targetObject.GetComponent<PlayerNetwork>();
         // Запрещаем урон самому себе и удары по некорректной цели.
         if (targetPlayer == null || targetPlayer == _playerNetwork)
-        {
-            Debug.Log("Can't attack yourself");
             return;
-        }
 
         // Итоговое значение HP ограничиваем снизу нулем.
         int nextHp = Mathf.Max(0, targetPlayer.HP.Value - damage);
