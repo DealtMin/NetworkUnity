@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1022328160265601644}
   - component: {fileID: 3691293958180443044}
   - component: {fileID: 4019989119535574902}
-  - component: {fileID: -149910890325817182}
+  - component: {fileID: 8456666695213784944}
   m_Layer: 0
   m_Name: FirstAid
   m_TagString: Untagged
@@ -113,8 +113,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.5928054, z: 1}
+  m_Center: {x: 0, y: 0.2964031, z: 0}
 --- !u!54 &3691293958180443044
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: -149910890325817182}
+  - {fileID: 0}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -200,7 +200,7 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     Scale: {x: 0.76, y: 0.456, z: 0.76}
     IsValid: 1
---- !u!114 &-149910890325817182
+--- !u!114 &8456666695213784944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,9 +209,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 333664065784375044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 46cdea85c1d2c7b4ab7025265069aac7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.EmptyNetworkBehaviour
-  _componentIndexCache: 0
+  m_EditorClassIdentifier: Assembly-CSharp::HealthPickup
+  _componentIndexCache: 255
   _addedNetworkObject: {fileID: 4019989119535574902}
-  _networkObjectCache: {fileID: 4019989119535574902}
+  _networkObjectCache: {fileID: 0}
+  _healAmount: 40

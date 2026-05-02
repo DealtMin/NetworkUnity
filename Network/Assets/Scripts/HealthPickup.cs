@@ -16,6 +16,7 @@ public class HealthPickup : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("trigger");
         if (!IsServerInitialized)
             return;
 
@@ -32,6 +33,7 @@ public class HealthPickup : NetworkBehaviour
             return;
 
         player.HP.Value = Mathf.Min(100, player.HP.Value + _healAmount);
+        Debug.Log("heald");
 
         _manager.OnPickedUp(_spawnPosition);
         Despawn(gameObject);

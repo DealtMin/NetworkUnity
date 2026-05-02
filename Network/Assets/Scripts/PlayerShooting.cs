@@ -19,7 +19,6 @@ public class PlayerShooting : NetworkBehaviour
     {
         base.OnStartNetwork();
 
-        _currentAmmo = _maxAmmo;
         _playerNetwork = GetComponent<PlayerNetwork>();
     }
 
@@ -40,20 +39,13 @@ public class PlayerShooting : NetworkBehaviour
     [ServerRpc]
     private void ShootServerRpc(Vector3 pos, Vector3 dir, NetworkConnection sender = null)
     {
-        // 1. Жив ли игрок
         if (_playerNetwork.HP.Value <= 0)
             return;
 
-        // 2. Есть ли патроны
-        if (_currentAmmo <= 0)
-            return;
-
-        // 3. Прошёл ли кулдаун
         if (Time.time < _lastShotTime + _cooldown)
             return;
 
         _lastShotTime = Time.time;
-        _currentAmmo--;
 
         GameObject go = Instantiate(
             _projectilePrefab,
