@@ -1,5 +1,5 @@
-using Unity.Netcode;
 using UnityEngine;
+using FishNet.Object;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : NetworkBehaviour
@@ -11,15 +11,19 @@ public class PlayerMovement : NetworkBehaviour
     private float _verticalVelocity;
     private PlayerNetwork _playerNetwork;
 
-    private void Awake() {
-         _cc = GetComponent<CharacterController>();
-         _playerNetwork = GetComponent<PlayerNetwork>();
+    private void Awake()
+    {
+        _cc = GetComponent<CharacterController>();
+        _playerNetwork = GetComponent<PlayerNetwork>();
     }
 
     private void Update()
     {
-        if (!IsOwner) return;
-        if (!_playerNetwork.IsAlive.Value) return;
+        if (!IsOwner)
+            return;
+
+        if (!_playerNetwork.IsAlive.Value)
+            return;
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -31,6 +35,7 @@ public class PlayerMovement : NetworkBehaviour
 
         _cc.Move(move * Time.deltaTime);
 
-        if (_cc.isGrounded) _verticalVelocity = 0f;
+        if (_cc.isGrounded)
+            _verticalVelocity = 0f;
     }
 }

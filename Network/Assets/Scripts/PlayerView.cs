@@ -1,7 +1,6 @@
-using Unity.Collections;
 using TMPro;
-using Unity.Netcode;
 using UnityEngine;
+using FishNet.Object;
 
 public class PlayerView : NetworkBehaviour
 {
@@ -9,31 +8,26 @@ public class PlayerView : NetworkBehaviour
     [SerializeField] private TMP_Text _nicknameText;
     [SerializeField] private TMP_Text _hpText;
 
-    public override void OnNetworkSpawn()
+    public override void OnStartClient()
     {
-        // Подписываемся на изменения только после сетевого спавна объекта.
-        _playerNetwork.Nickname.OnValueChanged += OnNicknameChanged;
-        _playerNetwork.HP.OnValueChanged += OnHpChanged;
-
-        // Сразу рисуем текущее состояние, чтобы UI не ждал первого сетевого события.
-        OnNicknameChanged(default, _playerNetwork.Nickname.Value);
-        OnHpChanged(0, _playerNetwork.HP.Value);
+        base.OnStartClient();
+        RefreshUI();
     }
 
-    public override void OnNetworkDespawn()
+    private void Update()
     {
-        // Отписка обязательна, чтобы не оставлять "висячие" обработчики.
-        _playerNetwork.Nickname.OnValueChanged -= OnNicknameChanged;
-        _playerNetwork.HP.OnValueChanged -= OnHpChanged;
+        RefreshUI();
     }
 
-    private void OnNicknameChanged(FixedString32Bytes oldValue, FixedString32Bytes newValue)
+    private void RefreshUI()
     {
-        _nicknameText.text = newValue.ToString();
-    }
+        if (_playerNetwork == null)
+            return;
 
-    private void OnHpChanged(int oldValue, int newValue)
-    {
-        _hpText.text = $"HP: {newValue}";
+        if (_nicknameText != null)
+            _nicknameText.text = _playerNetwork.Nickname.Value;
+
+        if (_hpText != null)
+            _hpText.text = $"HP: {_playerNetwork.HP.Value}";
     }
 }

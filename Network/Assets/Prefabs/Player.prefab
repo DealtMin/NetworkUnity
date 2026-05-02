@@ -383,55 +383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3030dcaa7066542ae89d01151993ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNetwork
-  ShowTopMostFoldoutHeaderGroup: 1
-  Nickname:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue:
-      utf8LengthInBytes: 0
-      bytes:
-        offset0000:
-          byte0000: 0
-          byte0001: 0
-          byte0002: 0
-          byte0003: 0
-          byte0004: 0
-          byte0005: 0
-          byte0006: 0
-          byte0007: 0
-          byte0008: 0
-          byte0009: 0
-          byte0010: 0
-          byte0011: 0
-          byte0012: 0
-          byte0013: 0
-          byte0014: 0
-          byte0015: 0
-        byte0016: 0
-        byte0017: 0
-        byte0018: 0
-        byte0019: 0
-        byte0020: 0
-        byte0021: 0
-        byte0022: 0
-        byte0023: 0
-        byte0024: 0
-        byte0025: 0
-        byte0026: 0
-        byte0027: 0
-        byte0028: 0
-        byte0029: 0
-  HP:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 100
-  IsAlive:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 1
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2032199461014265911}
+  _networkObjectCache: {fileID: 0}
   _spawnPoints: []
   _playerVisual: {fileID: 8687942608944043318}
 --- !u!114 &6192773299941529736
@@ -446,7 +400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f23e92823375e4fbb3393068b0e284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerView
-  ShowTopMostFoldoutHeaderGroup: 1
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2032199461014265911}
+  _networkObjectCache: {fileID: 0}
   _playerNetwork: {fileID: 7692480427583264062}
   _nicknameText: {fileID: 5180713967222972525}
   _hpText: {fileID: 5198468308202328554}
@@ -487,7 +443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fee9681a440bd448a7ab1bcf743379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  ShowTopMostFoldoutHeaderGroup: 1
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2032199461014265911}
+  _networkObjectCache: {fileID: 0}
   _speed: 5
   _gravity: -9.81
 --- !u!114 &2897591733893150314
@@ -502,7 +460,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fe982ba294a6649897fbe55d0749cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
-  ShowTopMostFoldoutHeaderGroup: 1
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2032199461014265911}
+  _networkObjectCache: {fileID: 0}
   _offset: {x: 0, y: 8, z: -9}
 --- !u!114 &2640725698380593427
 MonoBehaviour:
@@ -516,7 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5e6e1082abd4842bf53041506fba84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
-  ShowTopMostFoldoutHeaderGroup: 1
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2032199461014265911}
+  _networkObjectCache: {fileID: 0}
   _projectilePrefab: {fileID: 8088963082174307230, guid: 3dcac87f75919bf4fb9658feaba2593f, type: 3}
   _firePoint: {fileID: 406528620550342695}
   _cooldown: 0.4
@@ -571,7 +533,7 @@ MonoBehaviour:
   _teleportThreshold: 1
   <PrefabId>k__BackingField: 65535
   <SpawnableCollectionId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 2092870565765373345
   SceneId: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}

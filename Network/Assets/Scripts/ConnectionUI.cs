@@ -1,47 +1,47 @@
 using TMPro;
-using Unity.Netcode;
 using UnityEngine;
+using FishNet;
+using FishNet.Managing.Client;
+using FishNet.Transporting;
 
 public class ConnectionUI : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _nicknameInput;
     [SerializeField] private GameObject _menuPanel;
-    
+
     public static string PlayerNickname { get; private set; } = "Player";
 
     private void Start()
     {
-        // Подписываемся на события NetworkManager
-        if (NetworkManager.Singleton != null)
+        if (InstanceFinder.NetworkManager != null)
         {
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+            InstanceFinder.ClientManager.OnClientConnectionState += OnClientConnectionState;
         }
-        
-        // Показываем меню при старте
+
         ShowMenu();
     }
 
     private void OnDestroy()
     {
-        // Отписываемся от событий
-        if (NetworkManager.Singleton != null)
+        if (InstanceFinder.NetworkManager != null)
         {
-            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+            InstanceFinder.ClientManager.OnClientConnectionState -= OnClientConnectionState;
         }
     }
 
     public void StartAsHost()
     {
         SaveNickname();
-        NetworkManager.Singleton.StartHost();
+
+        // В FishNet host = server + client
+        InstanceFinder.ServerManager.StartConnection();
+        InstanceFinder.ClientManager.StartConnection();
     }
 
     public void StartAsClient()
     {
         SaveNickname();
-        NetworkManager.Singleton.StartClient();
+        InstanceFinder.ClientManager.StartConnection();
     }
 
     private void SaveNickname()
@@ -49,49 +49,36 @@ public class ConnectionUI : MonoBehaviour
         string rawValue = _nicknameInput != null ? _nicknameInput.text : string.Empty;
         PlayerNickname = string.IsNullOrWhiteSpace(rawValue) ? "Player" : rawValue.Trim();
     }
-    
-    private void OnClientConnected(ulong clientId)
+
+    private void OnClientConnectionState(ClientConnectionStateArgs args)
     {
-        // Проверяем, что это наш локальный клиент подключился
-        if (clientId == NetworkManager.Singleton.LocalClientId)
+        switch (args.ConnectionState)
         {
-            HideMenu();
-            Debug.Log($"[ConnectionUI] Connected as {PlayerNickname}, hiding menu");
+            case LocalConnectionState.Started:
+                HideMenu();
+                Debug.Log($"[ConnectionUI] Connected as {PlayerNickname}, hiding menu");
+                break;
+
+            case LocalConnectionState.Stopped:
+                ShowMenu();
+                Debug.Log("[ConnectionUI] Disconnected, showing menu");
+                break;
         }
     }
-    
-    private void OnClientDisconnected(ulong clientId)
-    {
-        // Если отключился наш клиент - показываем меню снова
-        if (clientId == NetworkManager.Singleton.LocalClientId)
-        {
-            ShowMenu();
-            Debug.Log("[ConnectionUI] Disconnected, showing menu");
-        }
-    }
-    
+
     private void HideMenu()
     {
         if (_menuPanel != null)
-        {
             _menuPanel.SetActive(false);
-        }
         else
-        {
-            // Если панель не назначена, скрываем весь объект
             gameObject.SetActive(false);
-        }
     }
-    
+
     private void ShowMenu()
     {
         if (_menuPanel != null)
-        {
             _menuPanel.SetActive(true);
-        }
         else
-        {
             gameObject.SetActive(true);
-        }
     }
 }
