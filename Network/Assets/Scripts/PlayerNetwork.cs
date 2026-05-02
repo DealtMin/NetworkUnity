@@ -16,12 +16,24 @@ public class PlayerNetwork : NetworkBehaviour
         _spawnPoints = FindObjectsByType<Respawn>(FindObjectsSortMode.None);
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        if (IsOwner)
+        {
+            SubmitNicknameServerRpc(ConnectionUI.PlayerNickname);
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void SubmitNicknameServerRpc(string nickname)
     {
+        int id = Owner != null ? Owner.ClientId : -1;
+
         Nickname.Value =
             string.IsNullOrWhiteSpace(nickname)
-            ? $"Player_{Owner.ClientId}"
+            ? $"Player_{id}"
             : nickname.Trim();
     }
 

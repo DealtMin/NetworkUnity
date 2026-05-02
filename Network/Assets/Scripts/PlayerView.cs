@@ -4,9 +4,18 @@ using FishNet.Object;
 
 public class PlayerView : NetworkBehaviour
 {
-    [SerializeField] private PlayerNetwork _playerNetwork;
+    private PlayerNetwork _playerNetwork;
+
     [SerializeField] private TMP_Text _nicknameText;
     [SerializeField] private TMP_Text _hpText;
+
+    private string _lastNick;
+    private int _lastHp;
+
+    private void Awake()
+    {
+        _playerNetwork = GetComponent<PlayerNetwork>();
+    }
 
     public override void OnStartClient()
     {
@@ -24,10 +33,16 @@ public class PlayerView : NetworkBehaviour
         if (_playerNetwork == null)
             return;
 
-        if (_nicknameText != null)
-            _nicknameText.text = _playerNetwork.Nickname.Value;
+        if (_playerNetwork.Nickname.Value != _lastNick)
+        {
+            _lastNick = _playerNetwork.Nickname.Value;
+            _nicknameText.text = _lastNick;
+        }
 
-        if (_hpText != null)
-            _hpText.text = $"HP: {_playerNetwork.HP.Value}";
+        if (_playerNetwork.HP.Value != _lastHp)
+        {
+            _lastHp = _playerNetwork.HP.Value;
+            _hpText.text = $"HP: {_lastHp}";
+        }
     }
 }
