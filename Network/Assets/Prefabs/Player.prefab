@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 2032199461014265911}
   - component: {fileID: 7948657182699523878}
   - component: {fileID: 110426244041886228}
+  - component: {fileID: 104070362480372137}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -541,6 +542,7 @@ MonoBehaviour:
   - {fileID: 2897591733893150314}
   - {fileID: 2640725698380593427}
   - {fileID: 7948657182699523878}
+  - {fileID: 104070362480372137}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -551,7 +553,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: -8584238456992681303
+  _initializedTimestamp: -8584237568236928002
   _localLevelOfDetailCalculationType: 0
   _useLevelOfDetail: 0
   _useRootLevelOfDetail: 1
@@ -575,7 +577,7 @@ MonoBehaviour:
   <AssetPathHash>k__BackingField: 2092870565765373345
   SceneId: 0
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
+    Position: {x: 0, y: -0.43, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
     IsValid: 1
@@ -603,10 +605,10 @@ MonoBehaviour:
   _useScaledTime: 1
   _interpolation: 2
   _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
+  _enableTeleport: 1
+  _teleportThreshold: 2
   _clientAuthoritative: 1
-  _sendToOwner: 1
+  _sendToOwner: 0
   _interval: 1
   _synchronizePosition: 1
   _positionSensitivity: 0.001
@@ -619,7 +621,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
-  _synchronizeScale: 1
+  _synchronizeScale: 0
   _scaleSensitivity: 0.001
   _scaleSnapping:
     X: 0
@@ -648,6 +650,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &104070362480372137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687942608944043318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6584f8faed9d9aa4fb4824ce6bc5ea7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovmenrPrediction
+  _componentIndexCache: 6
+  _addedNetworkObject: {fileID: 2032199461014265911}
+  _networkObjectCache: {fileID: 2032199461014265911}
+  moveSpeed: 5
+  gravity: -9.81
+  jumpHeight: 1.5
 --- !u!1 &8877368141914859132
 GameObject:
   m_ObjectHideFlags: 0
