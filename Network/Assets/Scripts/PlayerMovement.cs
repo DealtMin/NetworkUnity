@@ -22,20 +22,26 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner)
             return;
 
-        if (!_playerNetwork.IsAlive.Value)
+        if (!_cc.enabled)
             return;
+
+        if (!_playerNetwork.IsAlive.Value)
+        {
+            _verticalVelocity = 0f;
+            return;
+        }
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
         Vector3 move = new Vector3(h, 0f, v).normalized * _speed;
 
+        if (_cc.isGrounded && _verticalVelocity < 0f)
+            _verticalVelocity = -1f;
+
         _verticalVelocity += _gravity * Time.deltaTime;
         move.y = _verticalVelocity;
 
         _cc.Move(move * Time.deltaTime);
-
-        if (_cc.isGrounded)
-            _verticalVelocity = 0f;
     }
 }
