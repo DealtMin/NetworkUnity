@@ -1,47 +1,56 @@
 using UnityEngine;
 using FishNet.Object;
+using FishNet.Component.Transforming;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : NetworkBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _gravity = -9.81f;
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float gravity = -9.81f;
 
-    private CharacterController _cc;
-    private float _verticalVelocity;
+    private CharacterController _controller;
+    private Vector3 _velocity;
     private PlayerNetwork _playerNetwork;
 
     private void Awake()
     {
-        _cc = GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>();
         _playerNetwork = GetComponent<PlayerNetwork>();
     }
+public void ResetVelocity()
+{
+    _velocity = Vector3.zero;
+}
 
     private void Update()
     {
         if (!IsOwner)
             return;
 
-        if (!_cc.enabled)
+        if (_playerNetwork != null && !_playerNetwork.IsAlive.Value)
             return;
+        if (_controller.enabled)
+            HandleMovement();
+    }
 
-        if (!_playerNetwork.IsAlive.Value)
+    private void HandleMovement()
+    {
+        // Проверка земли
+        if (_controller.isGrounded && _velocity.y < 0)
         {
-            _verticalVelocity = 0f;
-            return;
+            _velocity.y = -2f;
         }
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(h, 0f, v).normalized * _speed;
+        Vector3 move = transform.right * x + transform.forward * z;
 
-        if (_cc.isGrounded && _verticalVelocity < 0f)
-            _verticalVelocity = -1f;
+        _controller.Move(move * moveSpeed * Time.deltaTime);
 
-        _verticalVelocity += _gravity * Time.deltaTime;
-        move.y = _verticalVelocity;
-
-        _cc.Move(move * Time.deltaTime);
+        // Гравитация
+        _velocity.y += gravity * Time.deltaTime;
+        _controller.Move(_velocity * Time.deltaTime);
     }
 }

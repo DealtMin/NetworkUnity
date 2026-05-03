@@ -43,8 +43,7 @@ public class Projectile : NetworkBehaviour
         if (target.Owner.ClientId == Owner.ClientId)
             return;
 
-        int newHp = Mathf.Max(0, target.HP.Value - _damage);
-        target.HP.Value = newHp;
+        target.TakeDamage(_damage);
 
         Despawn(gameObject);
     }

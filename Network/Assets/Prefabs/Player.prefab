@@ -419,8 +419,9 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2032199461014265911}
   _networkObjectCache: {fileID: 2032199461014265911}
-  _spawnPoints: []
-  _playerVisual: {fileID: 5381902198577157443}
+  characterController: {fileID: 8666748162086711069}
+  characterModel: {fileID: 5381902198577157443}
+  respawnDelay: 5
 --- !u!114 &6192773299941529736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,8 +479,8 @@ MonoBehaviour:
   _componentIndexCache: 2
   _addedNetworkObject: {fileID: 2032199461014265911}
   _networkObjectCache: {fileID: 2032199461014265911}
-  _speed: 5
-  _gravity: -9.81
+  moveSpeed: 5
+  gravity: -9.81
 --- !u!114 &2897591733893150314
 MonoBehaviour:
   m_ObjectHideFlags: 0
